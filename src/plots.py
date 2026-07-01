@@ -1,6 +1,14 @@
+from pathlib import Path
+
 import matplotlib.pyplot as plt
 import seaborn as sns
 import numpy as np
+
+
+def _ensure_parent_dir(filepath):
+    if filepath:
+        Path(filepath).parent.mkdir(parents=True, exist_ok=True)
+
 
 def plot_eda_regplots(df, filepath=None):
     """
@@ -27,6 +35,7 @@ def plot_eda_regplots(df, filepath=None):
     
     plt.tight_layout()
     if filepath:
+        _ensure_parent_dir(filepath)
         plt.savefig(filepath, dpi=300)
     plt.show()
 
@@ -54,6 +63,7 @@ def plot_eda_boxplots(df, filepath=None):
     
     plt.tight_layout()
     if filepath:
+        _ensure_parent_dir(filepath)
         plt.savefig(filepath, dpi=300)
     plt.show()
 
@@ -69,6 +79,7 @@ def plot_pivot_heatmap(df, filepath=None):
     plt.title('Uso de IA (Horas) por Carrera y Caso de Uso')
     plt.tight_layout()
     if filepath:
+        _ensure_parent_dir(filepath)
         plt.savefig(filepath, dpi=300)
     plt.show()
 
@@ -82,6 +93,7 @@ def plot_correlation_matrix(df, columns, filepath=None):
     plt.title('Matriz de Correlación entre Variables Numéricas')
     plt.tight_layout()
     if filepath:
+        _ensure_parent_dir(filepath)
         plt.savefig(filepath, dpi=300)
     plt.show()
 
@@ -109,6 +121,7 @@ def plot_residuals_distribution(y_test, y_pred_multi, y_pred_poly, filepath=None
     
     plt.tight_layout()
     if filepath:
+        _ensure_parent_dir(filepath)
         plt.savefig(filepath, dpi=300)
     plt.show()
 
@@ -124,6 +137,7 @@ def plot_predictions_vs_real(y_test, y_pred, title, filepath=None):
     plt.ylabel('Predicciones')
     plt.tight_layout()
     if filepath:
+        _ensure_parent_dir(filepath)
         plt.savefig(filepath, dpi=300)
     plt.show()
 
@@ -160,6 +174,7 @@ def plot_cv_predictions(y_train, y_cv_base, y_cv_multi, y_cv_poly,
     plt.suptitle('Diagnóstico de Predicciones Out-of-Fold (Validación Cruzada)', fontsize=14, y=1.03)
     plt.tight_layout()
     if filepath:
+        _ensure_parent_dir(filepath)
         plt.savefig(filepath, dpi=300)
     plt.show()
 
@@ -175,5 +190,6 @@ def plot_model_comparison(df_comparacion, filepath=None):
     plt.ylabel('Modelo')
     plt.tight_layout()
     if filepath:
+        _ensure_parent_dir(filepath)
         plt.savefig(filepath, dpi=300)
     plt.show()
